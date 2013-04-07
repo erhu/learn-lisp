@@ -39,13 +39,13 @@ ACL 第二章 练习题
 
 ::
 
-(b) (defun mystery (x y)
-      (if (null y)
-          nil
-          (if (eql (car y) x)
-              0
-              (let ((z (mystery x (cdr y))))
-                (and z (+ z 1))))))
+  (b) (defun mystery (x y)
+        (if (null y)
+            nil
+            (if (eql (car y) x)
+                0
+                (let ((z (mystery x (cdr y))))
+                  (and z (+ z 1))))))
 
    返回元素X中列表Y中的索引号
 
