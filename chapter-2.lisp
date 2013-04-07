@@ -56,8 +56,63 @@
 
 8. 给出函数的迭代与递归版本：
  8-1.接受一个正整数，并打印出数字数量的点。
+     迭代版本:
+     (defun print-point(num)
+	   (do ((i 0 (+ i 1)))
+	       ((> i num) 'done)
+	     (format t ".")))
+
+     递归版本:
+     (defun print-point (num)
+	   (if (= num 0)
+	       'done
+	       (progn
+		 (format t ".")
+		 (print-point (- num 1)))))
+     
  8-2.接受一个列表，并返回 a 在列表里所出现的次数。
+     迭代版本:
+        (defun obj-a-times (a lst)
+	   (let ((result 0))
+	     (dolist (obj lst)
+	       (if (eql obj a)
+		   (setf result (+ result 1))
+		   ))
+	     result))
+	 
+     递归版本
+        (defun obj-a-times-2 (a lst)
+	   (if (null lst)
+	       0
+	       (progn
+		 (if (eql a (car lst))
+		     (+ 1 (obj-a-times-2 a (cdr lst)))
+		     (obj-a-times-2 a (cdr lst))))))
+	
+9. 一位朋友想写一个函数，返回列表里所有非 nil 元素的和。
+他写了此函数的两个版本，但两个都不能工作。请解释每一个的错误在哪里，并给出正确的版本。
 
-9. 一位朋友想写一个函数，返回列表里所有非 nil 元素的和。他写了此函数的两个版本，但两个都不能工作。请解释每一个的错误在哪里，并给出正确的版本。
+(a) (defun summit (lst)
+      (remove nil lst)
+      (apply #'+ lst))
 
-(a) (defun summit (lst)      (remove nil lst)      (apply #'+ lst))(b) (defun summit (lst)      (let ((x (car lst)))        (if (null x)            (summit (cdr lst))            (+ x (summit (cdr lst))))))#1.
+    因为 remove 并未修改list，返回的是一个新列表；第2行代码改为
+    (setf lst (remove nil lst)) 即可。
+    
+(b) (defun summit (lst)
+      (let ((x (car lst)))
+        (if (null x)
+            (summit (cdr lst))
+            (+ x (summit (cdr lst))))))
+
+    错误原因:没有退出递归的条件；
+    正确的版本:
+         (defun summit (lst)
+	   (if (null lst)
+	       0
+	       (progn 
+		 (let ((x (car lst)))
+		   (if (null x)
+		       (summit (cdr lst))
+		       (+ x (summit (cdr lst))))))))
+	
