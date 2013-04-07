@@ -27,10 +27,13 @@ ACL 第二章 练习题
 
      
 5. 这些函数做了什么？
-(a):: (defun enigma (x)      
-        (and (not (null x))
-             (or (null (car x))     
-                 (enigma (cdr x)))))
+(a) 
+
+:: 
+  (defun enigma (x)      
+    (and (not (null x))
+         (or (null (car x))     
+             (enigma (cdr x)))))
 
    判断列表X是否包含NIL
 (b) (defun mystery (x y)
