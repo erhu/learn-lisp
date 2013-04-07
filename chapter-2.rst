@@ -40,7 +40,7 @@ ACL 第二章 练习题
         x
         y))
 
-     
+
 5. 这些函数做了什么？
 
 :: 
@@ -89,7 +89,7 @@ ACL 第二章 练习题
     (let ((result nil))
       (dolist (obj lst)
         (if (listp obj)
-	    (setf result t)))
+            (setf result t)))
       result))
 
 
@@ -102,14 +102,14 @@ ACL 第二章 练习题
   迭代版本:
      (defun print-point(num)
        (do ((i 0 (+ i 1)))
-	         ((> i num) 'done)
-	         (format t ".")))
+         ((> i num) 'done)
+         (format t ".")))
 
   递归版本:
      (defun print-point (num)
-	     (if (= num 0)
-	         'done
-	         (progn
+     (if (= num 0)
+         'done
+         (progn
              (format t ".")
              (print-point (- num 1)))))
 
@@ -117,23 +117,22 @@ ACL 第二章 练习题
 
   迭代版本:
    (defun obj-a-times (a lst)
-	   (let ((result 0))
-	     (dolist (obj lst)
-	       (if (eql obj a)
-		   (setf result (+ result 1))
-		   ))
-	     result))
-	 
+   (let ((result 0))
+     (dolist (obj lst)
+       (if (eql obj a)
+           (setf result (+ result 1)) ))
+     result))
+ 
   递归版本
    (defun obj-a-times-2 (a lst)
-	   (if (null lst)
-	       0
-	       (progn
+     (if (null lst)
+         0
+         (progn
            (if (eql a (car lst))
-		       (+ 1 (obj-a-times-2 a (cdr lst)))
-		       (obj-a-times-2 a (cdr lst))))))
+               (+ 1 (obj-a-times-2 a (cdr lst)))
+               (obj-a-times-2 a (cdr lst))))))
 
-	
+
 9. 一位朋友想写一个函数，返回列表里所有非 nil 元素的和。
 他写了此函数的两个版本，但两个都不能工作。请解释每一个的错误在哪里，并给出正确的版本。
 
@@ -145,7 +144,7 @@ ACL 第二章 练习题
 
     因为 remove 并未修改list，返回的是一个新列表；第2行代码改为
     (setf lst (remove nil lst)) 即可。
-    
+
   (b) (defun summit (lst)
         (let ((x (car lst)))
           (if (null x)
@@ -156,9 +155,9 @@ ACL 第二章 练习题
     正确的版本:
          (defun summit (lst)
            (if (null lst)
-	             0
-	             (progn 
-		             (let ((x (car lst)))
-		             (if (null x)
-		                 (summit (cdr lst))
-		                 (+ x (summit (cdr lst))))))))
+               0
+               (progn 
+                 (let ((x (car lst)))
+                 (if (null x)
+                     (summit (cdr lst))
+                     (+ x (summit (cdr lst))))))))
