@@ -1,4 +1,4 @@
-acl-exercises
+ACL-exercises
 =============
 
-acl exercises
+Ansi common lisp 练习题集。
