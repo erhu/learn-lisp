@@ -14,15 +14,9 @@ Chapter 3 习题 (Exercises)
 
 ::
 
-  ;这种写法好丑  
+  ;更好的写法
   (defun new-union (lst1 lst2)
-	   (dolist (obj lst2)
-	     (if (null (member obj lst1))
-		 (setf lst1 (append lst1 (list obj)))))
-	   lst1)
-
-   > (new-union '(a b c) '(b a d))
-   (A B C D)
+    (sort  (union lst1 lst2) #'string<))
 
 3. 定义一个函数，接受一个列表并返回一个列表，指出相等元素出现的次数，并由最常见至最少见的排序：
 
